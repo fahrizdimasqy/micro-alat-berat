@@ -15,6 +15,25 @@ const getAllAlat = async (req, res) => {
             raw: true,
             nest: true
         });
+        let kode = await axios
+            .get('http://localhost:3000/type')
+            .then(res => {
+                let kode = res.data.data
+                return kode;
+            })
+
+        alat.forEach(e => {
+            let gambar = e.gambar.replaceAll(" ", "%20");
+            const url = req.protocol + "://" + req.get('host') + "/images/" + gambar;
+            e.gambar = url;
+        });
+
+        // kode = JSON.parse(JSON.stringify(kode))
+        // console.log(alat)
+        // // console.log(kode)
+        // var merged = _.merge(_.keyBy(alat, 'kode_type'), _.keyBy(kode, 'id'));
+        // var result = _.values(merged);
+
         if (alat.length !== 0) {
             res.json({
                 'status': 'OK',
@@ -67,7 +86,7 @@ const postAlat = async (req, res) => {
         const url_json = await {
             url: url
         }
-        console.log(url, url_json)
+        // console.log(url, url_json)
         const output = await jm(req.body, url_json);
         console.log(output)
         if (alat) {
@@ -166,11 +185,25 @@ const deleteAlat = async (req, res) => {
 const getAlatById = async (req, res) => {
     try {
         const idparams = req.params.id;
+
+
         const alat = await model.alat_berat.findOne({
             where: {
                 id: idparams
             }
         });
+
+        let kode = await axios
+            .get('http://localhost:3000/type/id/' + idparams)
+            .then(res => {
+                let kode = res.data.data
+                return kode;
+            })
+
+        alat.kode_type = kode;
+        let gambar = alat.gambar.replaceAll(" ", "%20");
+        const url = req.protocol + "://" + req.get('host') + "/images/" + gambar;
+        alat.gambar = url;
         if (alat) {
             res.status(200).json({
                 'status': 'OK',
