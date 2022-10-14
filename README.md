@@ -20,10 +20,16 @@
 ```
 3. users/ GET
 4. users/5 GET
-5. refresh_tokens/  POST
+5. create refresh_tokens/  POST
 ```json
 {
     "refresh_token":"value",
     "user_id":"value@gmail.com",
 }
+```
+6. get_token get
+8. users/logout GET
+```json
+     "token":"value,
+    "user_id":"value",
 ```
