@@ -30,6 +30,8 @@
 6. get_token get
 8. users/logout GET
 ```json
+{
      "token":"value",
-    "user_id":"value",
+    "user_id":"value"
+}
 ```
