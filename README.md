@@ -21,4 +21,9 @@
 3. users/ GET
 4. users/5 GET
 5. refresh_tokens/  POST
-6.
+```json
+{
+    "refresh_token":"value",
+    "user_id":"value@gmail.com",
+}
+```
