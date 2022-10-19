@@ -23,21 +23,21 @@ const getAllAlat = async (req, res) => {
             })
 
         alat.forEach(e => {
+            kode.forEach(i => {
+                if (e.kode_type == i.kode_type) {
+                    e.kode_type = i;
+                    return;
+                }
+            })
             let gambar = e.gambar.replaceAll(" ", "%20");
             const url = req.protocol + "://" + req.get('host') + "/images/" + gambar;
             e.gambar = url;
         });
 
-        // kode = JSON.parse(JSON.stringify(kode))
-        // console.log(alat)
-        // // console.log(kode)
-        // var merged = _.merge(_.keyBy(alat, 'kode_type'), _.keyBy(kode, 'id'));
-        // var result = _.values(merged);
-
         if (alat.length !== 0) {
             res.json({
                 'status': 'OK',
-                'messages': '',
+                'messages': 'Get Data Success',
                 'data': alat
             })
         } else {
@@ -86,9 +86,13 @@ const postAlat = async (req, res) => {
         const url_json = await {
             url: url
         }
-        // console.log(url, url_json)
-        const output = await jm(req.body, url_json);
-        console.log(output)
+
+        
+        let kode = await show_type(alat.kode_type);
+        // console.log(kode)
+        alat.kode_type=kode;
+        const output = await jm(alat, url_json);
+        // console.log(output)
         if (alat) {
             res.status(201).json({
                 'status': 'OK',
@@ -107,7 +111,10 @@ const postAlat = async (req, res) => {
 const editAlat = async (req, res) => {
     try {
         const id = req.params.id;
-        const foto_alat = await req.file;
+        let foto_alat, alat;
+        if (req.file) {
+            foto_alat = await req.file;
+        }
         const {
             kode_type,
             merk,
@@ -116,33 +123,55 @@ const editAlat = async (req, res) => {
             denda,
             operator,
             bbm,
-            gambar,
             ket
         } = req.body;
-        const alat = await model.alat_berat.update({
-                kode_type: kode_type,
-                merk: merk,
-                status: status,
-                harga: harga,
-                denda: denda,
-                operator: operator,
-                bbm: bbm,
-                gambar: foto_alat.filename,
-                ket: ket
-            }, {
-                where: {
-                    id: id
+        if (foto_alat) {
+            alat = await model.alat_berat.update({
+                    kode_type: kode_type,
+                    merk: merk,
+                    status: status,
+                    harga: harga,
+                    denda: denda,
+                    operator: operator,
+                    bbm: bbm,
+                    gambar: foto_alat.filename,
+                    ket: ket
+                }, {
+                    where: {
+                        id: id
+                    }
                 }
+            );
+        } else {
+            alat = await model.alat_berat.update({
+                    kode_type: kode_type,
+                    merk: merk,
+                    status: status,
+                    harga: harga,
+                    denda: denda,
+                    operator: operator,
+                    bbm: bbm,
+                    ket: ket
+                }, {
+                    where: {
+                        id: id
+                    }
+                }
+            );
+        }
+        
+        
+        let kode = await show_type(req.body.kode_type);
+        req.body.kode_type=kode;
 
-            }
-
-        );
         const url = await req.protocol + "//" + req.get('host') + "/images" + foto_alat.filename;
+        const id_json = {
+            id:id
+        }
         const url_json = await {
             url: url
         }
-        const output = await jm(alat, url_json);
-        console.log(output)
+        const output = await jm(id_json, req.body, url_json);
 
         if (alat) {
             res.status(201).json({
@@ -162,18 +191,37 @@ const editAlat = async (req, res) => {
 const deleteAlat = async (req, res) => {
     try {
         const id = req.params.id;
-        const alat = await model.alat_berat.destroy({
+        const check = await model.alat_berat.findOne({
             where: {
                 id: id
             }
         });
-        if (alat) {
+
+        if (check){
+        
+        const idkode = check.kode_type;
+        let kode = await show_type(idkode);
+        check.kode_type = kode;
+            const alat = await model.alat_berat.destroy({
+                where: {
+                    id: id
+                }  
+            }
+            );
             res.status(200).json({
                 'status': 'OK',
                 'messages': 'Alat Berat Behasil di hapus',
-                'data': alat
+                'data': check
             })
         }
+        else{
+            res.status(404).json({
+                'status': 'not found',
+                'messages': 'Alat Berat tidak ditemukan',
+                'id': id
+            })
+        }
+            
     } catch (err) {
         res.status(500).json({
             message: "Ada kesalahan",
@@ -185,21 +233,14 @@ const deleteAlat = async (req, res) => {
 const getAlatById = async (req, res) => {
     try {
         const idparams = req.params.id;
-
-
         const alat = await model.alat_berat.findOne({
             where: {
                 id: idparams
             }
         });
 
-        let kode = await axios
-            .get('http://localhost:3000/type/id/' + idparams)
-            .then(res => {
-                let kode = res.data.data
-                return kode;
-            })
-
+        const idkode = alat.kode_type;
+        let kode = await show_type(idkode);
         alat.kode_type = kode;
         let gambar = alat.gambar.replaceAll(" ", "%20");
         const url = req.protocol + "://" + req.get('host') + "/images/" + gambar;
@@ -214,7 +255,7 @@ const getAlatById = async (req, res) => {
             res.status(404).json({
                 'status': 'not found',
                 'messages': 'Alat Berat tidak ditemukan',
-                'data': alat
+                'id': id
             })
         }
     } catch (err) {
@@ -226,6 +267,21 @@ const getAlatById = async (req, res) => {
 };
 
 
+const show_type = async (idkode) => {
+    let kode = await axios
+    .get('http://localhost:3000/type/id/' + idkode)
+    .then(res => {
+        let kode = res.data.data
+        let kode_json={
+            kode_type:kode.kode_type,
+            nama_type:kode.nama,
+            ket_type:kode.ket
+
+        }
+        return kode_json;
+    })
+    return kode;
+}
 
 
 

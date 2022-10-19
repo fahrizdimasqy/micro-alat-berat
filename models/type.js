@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   type.init({
+    kode_type: DataTypes.STRING,
     nama: DataTypes.STRING,
     ket: DataTypes.TEXT
   }, {

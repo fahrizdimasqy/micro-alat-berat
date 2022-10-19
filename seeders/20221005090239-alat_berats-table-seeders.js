@@ -4,7 +4,7 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.bulkInsert('alat_berats', [{
-        "kode_type": 1,
+        "kode_type": "T01",
         "merk": "Massey Ferguson MF 5355",
         "status": "ready",
         "harga": 2000000,
@@ -15,7 +15,7 @@ module.exports = {
         "ket": "Fuel Capacity 33 gal 125 L",
     },
     {
-      "kode_type": 1,
+      "kode_type": "T01",
       "merk": "Massey Ferguson MF 5355",
       "status": "ready",
       "harga": 2200000,
@@ -25,7 +25,7 @@ module.exports = {
       "gambar": "new-holland-ts6020.jpg",
   },
   {
-    "kode_type": 3,
+    "kode_type": "T03",
     "merk": "Komatsu S6D125E-2",
     "status": "ready",
     "harga": 3500000,
@@ -35,7 +35,7 @@ module.exports = {
     "gambar": "S6D125E-2.jpg",
 },
 {
-  "kode_type": 3,
+  "kode_type": "T03",
   "merk": "CAT D3K LGP",
   "status": "ready",
   "harga": 3600000,
@@ -45,7 +45,7 @@ module.exports = {
   "gambar": "CAT D3K LGP.jpg",
 },
 {
-  "kode_type": 2,
+  "kode_type": "T02",
   "merk": "Excavator Komatsu PC200-7 ",
   "status": "ready",
   "harga": 3800000,
@@ -55,7 +55,7 @@ module.exports = {
   "gambar": "Excavator Komatsu PC200-7 .jpg",
 },
 {
-  "kode_type": 2,
+  "kode_type": "T02",
   "merk": "Hitachi ZX210F-5G",
   "status": "ready",
   "harga": 3900000,
@@ -65,7 +65,7 @@ module.exports = {
   "gambar": "ZX210F-5G.jpg",
 },
 {
-  "kode_type": 4,
+  "kode_type": "T04",
   "merk": "Crawler Crane CKL1000i",
   "status": "ready",
   "harga": 4400000,

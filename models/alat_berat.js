@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   alat_berat.init({
-    kode_type: DataTypes.INTEGER,
+    kode_type: DataTypes.STRING,
     merk: DataTypes.STRING,
     status: DataTypes.STRING,
     harga: DataTypes.BIGINT,

@@ -29,10 +29,12 @@ const getAllType = async (req, res) => {
 const postType = async (req, res) => {
     try {
         const {
+            kode_type,
             nama,
             ket
         } = req.body;
         const type = await model.type.create({
+            kode_type: kode_type,
             nama: nama,
             ket: ket
         });
@@ -63,7 +65,7 @@ const editType = async (req, res) => {
             ket: ket
         }, {
             where: {
-                id: id
+                kode_type: id
             }
         });
         if (type) {
@@ -84,16 +86,30 @@ const editType = async (req, res) => {
 const deleteType = async (req, res) => {
     try {
         const id = req.params.id;
-        const type = await model.type.destroy({
+
+
+        let check = await model.type.findOne({
             where: {
-                id: id
+                kode_type: id
             }
         });
-        if (type) {
+
+        if (check) {
+            const type = await model.type.destroy({
+                where: {
+                    kode_type: id
+                }
+            });
             res.status(200).json({
                 'status': 'OK',
                 'messages': 'type Berat Behasil di hapus',
-                'data': type
+                'data': check
+            })
+        } else {
+            res.status(404).json({
+                'status': 'Not FOund',
+                'messages': 'type Alat Berat tidak ditemukan',
+                'id': id
             })
         }
     } catch (err) {
@@ -107,11 +123,12 @@ const deleteType = async (req, res) => {
 const getTypeById = async (req, res) => {
     try {
         const id = req.params.id;
-        const type = await model.type.findOne({
+        let type = await model.type.findOne({
             where: {
-                id: id
+                kode_type: id
             }
         });
+
         if (type) {
             res.status(200).json({
                 'status': 'OK',
@@ -124,6 +141,7 @@ const getTypeById = async (req, res) => {
                 'messages': 'type Berat tidak ditemukan',
                 'data': type
             })
+
         }
     } catch (err) {
         res.status(500).json({
@@ -132,7 +150,6 @@ const getTypeById = async (req, res) => {
         });
     }
 };
-
 
 
 module.exports = {

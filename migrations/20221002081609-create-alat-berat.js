@@ -12,7 +12,7 @@ module.exports = {
 
       kode_type: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING(80)
       },
       merk: {
         allowNull: false,

@@ -13,7 +13,7 @@ router
 router
     .route("/id/:id")
     .get(alatBeratController.getAlatById)
-    .put(alatBeratController.editAlat, upload.single("foto_alat"))
+    .put( upload.single("foto_alat") ,alatBeratController.editAlat)
     .delete(alatBeratController.deleteAlat);
 
 module.exports = router;
