@@ -10,6 +10,9 @@
     "gender": "Perempuan"
 }
 ```
+```
+endpoint: localhost:3000/users/register
+```
 2. users/login POTST
 ```json
 {
