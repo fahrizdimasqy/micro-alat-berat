@@ -9,9 +9,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      kode_type: {
+        allowNull: false,
+        primaryKey: true,
+        type: Sequelize.STRING(80)
+      },
       nama: {
         allowNull: false,
-        type: Sequelize.STRING(120)
+        type: Sequelize.STRING(255)
       },
       ket: {
         allowNull: true,

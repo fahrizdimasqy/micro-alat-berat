@@ -1,23 +1,24 @@
+
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "alatberatservice",
-    "host": "127.0.0.1",
+    "username": "be82b3ac327836",
+    "password": "42fd4569",
+    "database": "heroku_eee65f7acea2271",
+    "host": "us-cdbr-east-06.cleardb.net",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "alatberatservice",
-    "host": "127.0.0.1",
+    "username": "be82b3ac327836",
+    "password": "42fd4569",
+    "database": "heroku_eee65f7acea2271",
+    "host": "us-cdbr-east-06.cleardb.net",
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "alatberatservice",
-    "host": "127.0.0.1",
+    "username": "be82b3ac327836",
+    "password": "42fd4569",
+    "database": "heroku_eee65f7acea2271",
+    "host": "us-cdbr-east-06.cleardb.net",
     "dialect": "mysql"
   }
 }
