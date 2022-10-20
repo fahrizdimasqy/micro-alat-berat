@@ -1,5 +1,5 @@
 ## User Service
-### Route
+### Route and Method
 1. users/register POST
 ```json
 {
