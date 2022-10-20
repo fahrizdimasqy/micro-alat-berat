@@ -31,7 +31,7 @@
 ```
 localhost:5000/refresh_tokens?refresh_token=wqerqwrqwrtqwr12
 ```
-8. users/logout GET
+8. users/logout POST
 ```json
 {
      "token":"value",
