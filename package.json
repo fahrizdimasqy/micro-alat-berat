@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "api": "node detail_sewa.js",
     "start": "node ./bin/www",
     "test": "nodemon ./bin/www"
   },
