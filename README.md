@@ -23,9 +23,18 @@ endpoint: localhost:3000/users/register
     "password":"rahasiaku123",
 }
 ```
+```
+endpoint: localhost:3000/users/login
+```
 3. users/ GET
-4. users/5 GET
-5. create refresh_tokens/  POST
+```
+endpoint: localhost:3000/users
+```
+5. users/5 GET
+```
+endpoint: localhost:3000/users/5
+```
+7. create refresh_tokens/  POST
 ```json
 {
     "refresh_token":"value",
