@@ -1,4 +1,6 @@
 ## User Service
+### Flow Authentication
+![Alur aplikasi](flow_auth.png)
 ### Route and Method
 1. users/register POST
 ```json
