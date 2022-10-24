@@ -78,10 +78,18 @@ tambahkan pada headers authorization dan isikan token
 contoh Authorization : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjo2LCJuYW1lIjoiUGFzeWhhIiwiZ2VuZGVyIjoiR2F5Iiwibm9fdGxwIjoiMDh4eHgiLCJlbWFpbCI6InBhc3loYWNvYnVsQGdtYWlsLmNvbSIsInJvbGUiOiJjdXN0b21lciJ9LCJpYXQiOjE2NjY2MjYxMDEsImV4cCI6MTY2NjYyNjQwMX0.DSyFY6_NbAfkgTbXwJYCGZla525ayC16kHgvZoJ4vBk
 ```
 
-10. get profile GET
+10. /getProfile GET
 ```endpoint
 localhost:3000/users
 ```
 ```
 Header : Authorization = value(token) eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjo2LCJuYW1lIjoiUGFzeWhhIiwiZ2VuZGVyIjoiR2F5Iiwibm9fdGxwIjoiMDh4eHgiLCJlbWFpbCI6InBhc3loYWNvYnVsQGdtYWlsLmNvbSIsInJvbGUiOiJjdXN0b21lciJ9LCJpYXQiOjE2NjY2MzIwNTEsImV4cCI6MTY2NjYzMjM1MX0.fE0_n5nvu_Tp38PZysSo7pp_VVpUtOmmoNBkeIfDWPg
+```
+11. /users/logout POST
+```
+endpoint
+localhost:3000/users/logout
+```
+```
+Headers Authorization = token
 ```
