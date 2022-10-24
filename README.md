@@ -73,6 +73,7 @@ localhost:3000/users
     "gender": "Laki-laki"
 }
 ```
+```
 tambahkan pada headers authorization dan isikan token
 contoh Authorization : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjo2LCJuYW1lIjoiUGFzeWhhIiwiZ2VuZGVyIjoiR2F5Iiwibm9fdGxwIjoiMDh4eHgiLCJlbWFpbCI6InBhc3loYWNvYnVsQGdtYWlsLmNvbSIsInJvbGUiOiJjdXN0b21lciJ9LCJpYXQiOjE2NjY2MjYxMDEsImV4cCI6MTY2NjYyNjQwMX0.DSyFY6_NbAfkgTbXwJYCGZla525ayC16kHgvZoJ4vBk
 ```
