@@ -8,7 +8,8 @@ module.exports = async (req, res) => {
         name: 'string|empty:false',
         email: 'email|empty:false',
         password: 'string|min:6',
-        no_tlp: 'string|optional'
+        no_tlp: 'string|optional',
+        gender: 'string|optional'
 
     };
 
@@ -46,6 +47,7 @@ module.exports = async (req, res) => {
     const {
         name,
         no_tlp,
+        gender,
     } = req.body;
 
     await user.update({
@@ -53,6 +55,7 @@ module.exports = async (req, res) => {
         password,
         name,
         no_tlp,
+        gender
 
     });
 
@@ -63,7 +66,7 @@ module.exports = async (req, res) => {
             name,
             email,
             no_tlp,
-
+            gender
         }
     });
 

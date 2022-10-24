@@ -1,14 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
-const handlerUser = require('./handler/users')
+const usersHandler = require('./handler/users');
 
+router.post('/register', usersHandler.register);
+router.post('/login', usersHandler.login);
+router.post('/logout', usersHandler.logout);
+router.put('/:id', usersHandler.update);
+router.get('/:id', usersHandler.getUser);
+router.get('/', usersHandler.getUsers);
 
-/* GET users listing. */
-router.post('/register', handlerUser.register);
-router.post('/login', handlerUser.login);
-router.put('/:id', handlerUser.update);
-router.get('/:id', handlerUser.getUser);
-router.get('/', handlerUser.getUsers);
-router.post('/logout', handlerUser.logout);
 module.exports = router;

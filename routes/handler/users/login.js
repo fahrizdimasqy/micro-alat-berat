@@ -47,7 +47,6 @@ module.exports = async (req, res) => {
             gender: user.gender,
             no_tlp: user.no_tlp,
             email: user.email,
-            password: user.password,
             role: user.role
         }
     })
