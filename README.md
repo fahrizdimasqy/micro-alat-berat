@@ -44,6 +44,9 @@ endpoint: localhost:3000/users/5
     "user_id":"value@gmail.com",
 }
 ```
+```
+endpoint localhost:3000/refresh-tokens
+```
 6. get_token get
 ```
 localhost:5000/refresh_tokens?refresh_token=wqerqwrqwrtqwr12
