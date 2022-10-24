@@ -1,3 +1,6 @@
+### Micro alat berat
+## Stack Tech
+![Alur aplikasi](stack_tech.png)
 ## User Service
 ### Flow Authentication
 ![Alur aplikasi](flow_auth.png)
