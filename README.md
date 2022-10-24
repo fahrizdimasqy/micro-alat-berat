@@ -35,11 +35,11 @@ endpoint: localhost:3000/users/login
 ```
 endpoint: localhost:3000/users
 ```
-5. users/5 GET
+4. users/5 GET
 ```
 endpoint: localhost:3000/users/5
 ```
-7. create refresh_tokens/  POST
+5. create refresh_tokens/  POST
 ```json
 {
     "refresh_token":"value",
@@ -49,7 +49,7 @@ endpoint: localhost:3000/users/5
 ```
 endpoint localhost:3000/refresh-tokens
 ```
-6. get_token get
+7. get_token get
 ```
 localhost:5000/refresh_tokens?refresh_token=wqerqwrqwrtqwr12
 ```
@@ -59,4 +59,20 @@ localhost:5000/refresh_tokens?refresh_token=wqerqwrqwrtqwr12
      "token":"value",
     "user_id":"value"
 }
+```
+9. update user PUT
+```endpoint
+localhost:3000/users
+```
+```json
+{
+     "name":"Pasyha",
+    "email":"pasyhacobul@gmail.com",
+    "password":"test12345",
+    "no_tlp":"08xxx",
+    "gender": "Laki-laki"
+}
+```
+tambahkan pada headers authorization dan isikan token
+contoh Authorization : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjo2LCJuYW1lIjoiUGFzeWhhIiwiZ2VuZGVyIjoiR2F5Iiwibm9fdGxwIjoiMDh4eHgiLCJlbWFpbCI6InBhc3loYWNvYnVsQGdtYWlsLmNvbSIsInJvbGUiOiJjdXN0b21lciJ9LCJpYXQiOjE2NjY2MjYxMDEsImV4cCI6MTY2NjYyNjQwMX0.DSyFY6_NbAfkgTbXwJYCGZla525ayC16kHgvZoJ4vBk
 ```
