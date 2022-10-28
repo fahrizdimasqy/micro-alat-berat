@@ -119,7 +119,7 @@ TRANSAKSI SERVICE
     - Endpoint
     ```endpoint
 
-    localhost:1000/api/readData
+    localhost:3000/api/readData
     ```
 
 2. Upload detail sewa
@@ -142,7 +142,7 @@ TRANSAKSI SERVICE
     - Endpoint
     ```endpoint
 
-    localhost:1000/detailsewa
+    localhost:3000/detailsewa
     ```
 
 3. Membuat Pengajuan
@@ -166,7 +166,7 @@ TRANSAKSI SERVICE
     ```
     - Endpoint
     ```endpoint
-    localhost:1000/api/createPengajuan
+    localhost:3000/api/createPengajuan
     ```
 
 4. Mengupdate Bukti Pembayaran
@@ -188,7 +188,7 @@ TRANSAKSI SERVICE
     ```
     - Endpoint
     ```endpoint
-    localhost:1000/buktipembayaran
+    localhost:3000/buktipembayaran
     ```
 
 5. Read Data by id
@@ -242,5 +242,5 @@ TRANSAKSI SERVICE
     ```
     - Endpoint
     ```endpoint
-    localhost:1000/readDataUser/id
+    localhost:3000/readDataUser/id
     ```
