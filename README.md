@@ -530,7 +530,9 @@ SERVIS ALAT BERAT
     ```
 5. Delete Alat Berat
     - Method
-    - Request
+        - DELETE
+    - Request Params
+        - id
     - Response
      ```json
      {
@@ -559,4 +561,159 @@ SERVIS ALAT BERAT
     - Endpoint
     ```endpoint
     localhost:3000/alatberat/id/:id
+    ```
+
+SERVIS TIPE ALAT BERAT
+1. Get Type Alat Berat
+    - Method
+        GET
+    - Response
+    ```json
+    {
+        "status": "OK",
+        "messages": "",
+        "data": [
+            {
+                "id": 1,
+                "kode_type": "T01",
+                "nama": "Traktor",
+                "ket": "Alat berat traktor umumnya ditemui di industri pertanian yang berguna untuk membajak atau menggemburkan tanah. ",
+                "createdAt": null,
+                "updatedAt": null
+            },
+            {
+                "id": 2,
+                "kode_type": "T02",
+                "nama": "Excavator",
+                "ket": "Excavator disebut juga dengan nama bego atau beko. Excavator banyak digunakan dalam beragam industri karena fungsinya yang beragam. Alat berat yang satu ini digunakan untuk menggali tanah, meratakan tanah atau jalan, dan memindahkan material. ",
+                "createdAt": null,
+                "updatedAt": null
+            },
+            {
+                "id": 3,
+                "kode_type": "T03",
+                "nama": "Bulldozer",
+                "ket": "Bulldozer adalah alat berat beroda rantai yang memiliki fungsi mengolah lahan seperti meratakan tanah, mendorong tanah ke berbagai arah. ",
+                "createdAt": null,
+                "updatedAt": null
+            },
+            {
+                "id": 4,
+                "kode_type": "T04",
+                "nama": "Crane",
+                "ket": "Crane adalah alat berat yang mencolok dan sering ditemui pada pembangunan suatu gedung. Fungsinya untuk memindahkan material dari bawah ke atas dan dari atas ke bawah.    ",
+                "createdAt": null,
+                "updatedAt": null
+            },
+            {
+                "id": 14,
+                "kode_type": "",
+                "nama": "",
+                "ket": null,
+                "createdAt": "2022-10-21T02:01:00.000Z",
+                "updatedAt": "2022-10-21T02:01:00.000Z"
+            }
+        ]
+    }
+    ```
+    - Endpoint
+    ```endpoint
+    localhost:3000/type
+    ```
+2. Get Type Alat Berat by id
+    - Method
+        GET
+    - Request Params
+        - kode_type
+    - Response
+     ```json
+     {
+        "status": "OK",
+        "messages": "type Berat ditemukan",
+        "data": {
+            "id": 1,
+            "kode_type": "T01",
+            "nama": "Traktor",
+            "ket": "Alat berat traktor umumnya ditemui di industri pertanian yang berguna untuk membajak atau menggemburkan tanah. ",
+            "createdAt": null,
+            "updatedAt": null
+        }
+    }
+    ```
+    - Endpoint
+    ```endpoint
+    localhost:3000/type/id/:kode_type
+    ```
+3. Post Type Alat Berat
+    - Method
+        POST
+    - Request Body
+        - kode_type
+        - nama
+        - ket
+    - Response
+     ```json
+     {
+        "status": "OK",
+        "messages": "type Berat berhasil ditambah",
+        "data": {
+            "id": 44,
+            "kode_type": "T08",
+            "nama": "Dummy nama",
+            "ket": "ini keterangan LOHHHH",
+            "updatedAt": "2022-10-29T17:06:57.064Z",
+            "createdAt": "2022-10-29T17:06:57.064Z"
+        }
+    }
+
+    ```
+    - Endpoint
+    ```endpoint
+    localhost:3000/type
+    ```
+4. Put Type Alat Berat
+    - Method
+        PUT
+    - Request Params
+        - kode_type
+    - Request Body
+        - nama
+        - ket
+    - Response
+     ```json
+     {
+        "status": "OK",
+        "messages": "type Berat Behasil di update",
+        "data": [
+            1
+        ]
+    }
+    ```
+    - Endpoint
+    ```endpoint
+    localhost:3000/type/id/:kode_type
+    ```
+5. Delete Type Alat Berat
+    - Method
+        DELETE
+    - Request Params
+        - kode_type
+    - Response
+     ```json
+     {
+        "status": "OK",
+        "messages": "type Berat Behasil di hapus",
+        "data": {
+            "id": 44,
+            "kode_type": "T08",
+            "nama": "Dummy nama diubah",
+            "ket": "ini keterangan LOHHHH",
+            "createdAt": "2022-10-29T17:06:57.000Z",
+            "updatedAt": "2022-10-29T17:17:47.000Z"
+        }
+    }
+    ```
+    - Endpoint
+    ```endpoint
+    localhost:3000/type/id/:kode_type
     ```
