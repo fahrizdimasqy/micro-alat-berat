@@ -7,7 +7,6 @@
 ## Hubungan dengan service lain
 ![Alur aplikasi](komunikasi_api_user.png)
 ### Route and Method
-<<<<<<< HEAD
 SERVIS USER
 1. users/register POST
     ```json
