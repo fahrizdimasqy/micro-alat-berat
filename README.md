@@ -199,7 +199,7 @@ TRANSAKSI SERVICE
     - Endpoint
     ```endpoint
 
-    localhost:3000/api/readData
+    localhost:3000/transaksi/api/readData
     ```
 
 2. Upload detail sewa
