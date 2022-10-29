@@ -7,8 +7,17 @@ const api = apiAdapter(URL_SERVICE_ALAT);
 
 module.exports = async (req, res) => {
     try {
+        const role = req.user.data.role
+        console.log(role)
+        if(role == "admin"){
+
         const user = await api.post('/type/', req.body);
         return res.json(user.data);
+        }
+        else{
+            return res.status(401).json({ status: 'Unauthorized', message: 'Anda bukan Admin' });
+
+        }
     } catch (error) {
 
         if (error.code === 'ECONNREFUSED') {

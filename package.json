@@ -1,27 +1,24 @@
 {
-  "name": "micro-alatberat",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-<<<<<<< HEAD
-    "start": "node ./bin/www",
-    "test": "nodemon ./bin/www"
-=======
-    "start": "node ./bin/www"
->>>>>>> 79f4351b8f3a735e069d0a080ac4520723ffa3f7
-  },
-  "dependencies": {
-    "axios": "^0.27.2",
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "dotenv": "^16.0.2",
-    "express": "~4.16.1",
-    "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
-    "jsonwebtoken": "^8.5.1",
-    "morgan": "~1.9.1"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.20"
+    "name": "service-customer",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+      "start": "node ./bin/www"
+    },
+    "dependencies": {
+      "bcrypt": "^5.0.1",
+      "cookie-parser": "~1.4.4",
+      "debug": "~2.6.9",
+      "dotenv": "^16.0.2",
+      "express": "~4.16.1",
+      "fastest-validator": "^1.15.0",
+      "morgan": "~1.9.1",
+      "mysql2": "^2.3.3",
+      "sequelize": "^6.23.2",
+      "sequelize-cli": "^6.5.1"
+    },
+    "devDependencies": {
+      "nodemon": "^2.0.20"
+    }
   }
-}
+  
