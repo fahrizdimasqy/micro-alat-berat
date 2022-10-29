@@ -20,9 +20,9 @@ const getAllAlat = async (req, res) => {
                 let kode = res.data.data
                 return kode;
             })
-            
-    // const coba = `coba${alat}`;
-    // console.log(coba)
+
+        // const coba = `coba${alat}`;
+        // console.log(coba)
 
         alat.forEach(e => {
             kode.forEach(i => {
@@ -108,6 +108,7 @@ const postAlat = async (req, res) => {
             error: err,
         });
     }
+
 };
 
 const editAlat = async (req, res) => {
@@ -129,46 +130,44 @@ const editAlat = async (req, res) => {
         } = req.body;
         if (foto_alat) {
             alat = await model.alat_berat.update({
-                    kode_type: kode_type,
-                    merk: merk,
-                    status: status,
-                    harga: harga,
-                    denda: denda,
-                    operator: operator,
-                    bbm: bbm,
-                    gambar: foto_alat.filename,
-                    ket: ket
-                }, {
-                    where: {
-                        id: id
-                    }
+                kode_type: kode_type,
+                merk: merk,
+                status: status,
+                harga: harga,
+                denda: denda,
+                operator: operator,
+                bbm: bbm,
+                gambar: foto_alat.filename,
+                ket: ket
+            }, {
+                where: {
+                    id: id
                 }
-            );
+            });
         } else {
             alat = await model.alat_berat.update({
-                    kode_type: kode_type,
-                    merk: merk,
-                    status: status,
-                    harga: harga,
-                    denda: denda,
-                    operator: operator,
-                    bbm: bbm,
-                    ket: ket
-                }, {
-                    where: {
-                        id: id
-                    }
+                kode_type: kode_type,
+                merk: merk,
+                status: status,
+                harga: harga,
+                denda: denda,
+                operator: operator,
+                bbm: bbm,
+                ket: ket
+            }, {
+                where: {
+                    id: id
                 }
-            );
+            });
         }
-        
-        
+
+
         let kode = await show_type(req.body.kode_type);
-        req.body.kode_type=kode;
+        req.body.kode_type = kode;
 
         const url = await req.protocol + "//" + req.get('host') + "/images" + foto_alat.filename;
         const id_json = {
-            id:id
+            id: id
         }
         const url_json = await {
             url: url
@@ -199,31 +198,29 @@ const deleteAlat = async (req, res) => {
             }
         });
 
-        if (check){
-        
-        const idkode = check.kode_type;
-        let kode = await show_type(idkode);
-        check.kode_type = kode;
+        if (check) {
+
+            const idkode = check.kode_type;
+            let kode = await show_type(idkode);
+            check.kode_type = kode;
             const alat = await model.alat_berat.destroy({
                 where: {
                     id: id
-                }  
-            }
-            );
+                }
+            });
             res.status(200).json({
                 'status': 'OK',
                 'messages': 'Alat Berat Behasil di hapus',
                 'data': check
             })
-        }
-        else{
+        } else {
             res.status(404).json({
                 'status': 'not found',
                 'messages': 'Alat Berat tidak ditemukan',
                 'id': id
             })
         }
-            
+
     } catch (err) {
         res.status(500).json({
             message: "Ada kesalahan",
@@ -271,17 +268,17 @@ const getAlatById = async (req, res) => {
 
 const show_type = async (idkode) => {
     let kode = await axios
-    .get('https://alat-berat-service.herokuapp.com/type/id/' + idkode)
-    .then(res => {
-        let kode = res.data.data
-        let kode_json={
-            kode_type:kode.kode_type,
-            nama_type:kode.nama,
-            ket_type:kode.ket
+        .get('https://alat-berat-service.herokuapp.com/type/id/' + idkode)
+        .then(res => {
+            let kode = res.data.data
+            let kode_json = {
+                kode_type: kode.kode_type,
+                nama_type: kode.nama,
+                ket_type: kode.ket
 
-        }
-        return kode_json;
-    })
+            }
+            return kode_json;
+        })
     return kode;
 }
 
