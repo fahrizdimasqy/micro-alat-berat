@@ -717,3 +717,57 @@ SERVIS TIPE ALAT BERAT
     ```endpoint
     localhost:3000/type/id/:kode_type
     ```
+DETAIL SEWA ALAT BERAT
+1. Get Type Alat Berat
+    -Type 
+        GET
+    -Response
+    ```{
+    "status": "OK",
+    "messages": "",
+    "data": {
+        "detail_sewa": [
+            {
+                "id_detail_sewa": 1,
+                "id_sewa": 1,
+                "id_alat_berat": 1,
+                "merk_barang": "Massey Ferguson MF 5355",
+                "harga_barang": 2000000,
+                "denda_barang": 250000,
+                "jumlah_barang": "2",
+                "total_harga": 4000000,
+                "total_denda": 500000,
+                "status_sewa": "LUNAS"
+            },
+            {
+                "id_detail_sewa": 2,
+                "id_sewa": 2,
+                "id_alat_berat": 2,
+                "merk_barang": "Dummy Merk Dirubah",
+                "harga_barang": 2000,
+                "denda_barang": 2000,
+                "jumlah_barang": "3",
+                "total_harga": 6000,
+                "total_denda": 6000,
+                "status_sewa": "BELUM"
+            },
+            {
+                "id_detail_sewa": 3,
+                "id_sewa": 3,
+                "id_alat_berat": 3,
+                "merk_barang": "Komatsu S6D125E-2",
+                "harga_barang": 3500000,
+                "denda_barang": 400000,
+                "jumlah_barang": "1",
+                "total_harga": 3500000,
+                "total_denda": 400000,
+                "status_sewa": "LUNAS"
+            }
+        ]
+    }
+}``
+
+ - Endpoint
+    ```endpoint
+    http://localhost:7000/detailsewa/detail
+    ```
