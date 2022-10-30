@@ -5,6 +5,6 @@ const verifyToken = require('../middlewares/verifyToken')
 const detailHandler = require('./handler/detailSewa');
 
 
-router.get('/', detailHandler.getDetail);
+router.get('/detail', detailHandler.getDetail)
 
 module.exports =router;

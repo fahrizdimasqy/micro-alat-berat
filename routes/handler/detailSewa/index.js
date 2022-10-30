@@ -1,5 +1,5 @@
-const detail = require('./getDetail');
+const getDetail = require('./getDetail');
 
 module.exports = {
-    detail
+    getDetail
 }
