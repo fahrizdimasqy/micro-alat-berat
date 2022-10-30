@@ -25,8 +25,8 @@ app.use('/detailsewa', detailRouter);
 app.use('/type', typeRouter);
 
 
-app.listen(process.env.PORT || 3000, () => {
-    console.log("Example app listening on http://localhost:3000");
+app.listen(process.env.PORT || 7000, () => {
+    console.log("Example app listening on http://localhost:7000");
   });
 
 module.exports = app;

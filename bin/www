@@ -90,10 +90,3 @@
      : 'port ' + addr.port;
    debug('Listening on ' + bind);
  }
-
- var requireStack = require('require-stack')
-try{
-  requireStack('./module/with/syntax/error')
-}catch(e){
-  console.log(e.stack)
-}

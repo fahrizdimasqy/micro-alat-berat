@@ -3,7 +3,7 @@ const router = express.Router();
 const detailSewaController = require("../controller/detail_sewa");
 
 router
-    .route("/")
+    .route("/detail")
     .get(detailSewaController.getDetailSewa)
 
 module.exports = router;
