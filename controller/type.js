@@ -31,12 +31,14 @@ const postType = async (req, res) => {
         const {
             kode_type,
             nama,
-            ket
+            ket,
+            id
         } = req.body;
         const type = await model.type.create({
             kode_type: kode_type,
             nama: nama,
-            ket: ket
+            ket: ket,
+            kode_type:id
         });
         if (type) {
             res.status(201).json({
