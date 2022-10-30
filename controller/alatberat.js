@@ -261,7 +261,7 @@ const getAlatById = async (req, res) => {
 
 const show_type = async (idkode) => {
     let kode = await axios
-        .get('localhost:3000/type/' + idkode)
+        .get('http://localhost:3000/type/id/' + idkode)
         .then(res => {
             let kode = res.data.data
             let kode_json = {
@@ -272,6 +272,7 @@ const show_type = async (idkode) => {
             }
             return kode_json;
         })
+        
     return kode;
 }
 
