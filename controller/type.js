@@ -31,14 +31,22 @@ const postType = async (req, res) => {
         const {
             kode_type,
             nama,
+<<<<<<< HEAD
             ket,
             id
+=======
+            ket
+>>>>>>> cbed378da8fe6635ecbd85b32d7e1e3b7664586a
         } = req.body;
         const type = await model.type.create({
             kode_type: kode_type,
             nama: nama,
+<<<<<<< HEAD
             ket: ket,
             kode_type:id
+=======
+            ket: ket
+>>>>>>> cbed378da8fe6635ecbd85b32d7e1e3b7664586a
         });
         if (type) {
             res.status(201).json({
