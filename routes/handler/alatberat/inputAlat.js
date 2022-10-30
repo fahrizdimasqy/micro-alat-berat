@@ -6,19 +6,60 @@ const {
 const api = apiAdapter(URL_SERVICE_ALAT);
 
 module.exports = async (req, res) => {
+
     try {
-        // const id = req.user.data.id
-        const alatberat = await api.post(`/alatberat/`, req.body);
-        console.log(req.body)
-        return res.json(alatberat.data);
+        const role = req.user.data.role
+        if (role == "admin") {
+
+            const {
+                kode_type,
+                merk,
+                status,
+                harga,
+                denda,
+                operator,
+                bbm,
+                ket
+            } = await req.body;
+            const foto_alat = await req.file;
+            const gambar = foto_alat.filename
+            const filenameUrl = gambar.replaceAll(" ", "%20")
+            const url = await req.protocol + "://" + req.get('host') + "/alat-berat/img/" + filenameUrl;
+
+            const send = {
+                kode_type,
+                merk,
+                status,
+                harga,
+                denda,
+                operator,
+                bbm,
+                gambar,
+                ket,
+                url_gambar: url
+            }
+            const alatberat = await api.post(`/alatberat/`, send);
+            return res.json(alatberat.data);
+        } else {
+            return res.status(401).json({
+                status: 'Unauthorized',
+                message: 'Anda bukan Admin'
+            });
+
+        }
+
     } catch (error) {
 
         if (error.code === 'ECONNREFUSED') {
-            return res.status(500).json({ status: 'error', message: 'service unavailable' });
+            return res.status(500).json({
+                status: 'error',
+                message: 'service unavailable'
+            });
         }
-        res.status(500).json({
-            message: "Ada kesalahan",
-            error: error,
-        });
+
+        const {
+            data
+        } = error.response;
+        return res.status(500).json(data);
     }
 }
