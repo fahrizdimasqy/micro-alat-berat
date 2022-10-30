@@ -769,5 +769,5 @@ DETAIL SEWA ALAT BERAT
 
  - Endpoint
     ```endpoint
-    http://localhost:7000/detailsewa/detail
+    http://localhost:3000/detail
     ```
