@@ -7,22 +7,22 @@ const {
 } = require('express');
 const upload = require('../helper/uploader');
 const jm = require('jmerger')
+const server = "http://localhost:3000"
+
 
 const getAllAlat = async (req, res) => {
-    try {
+      try {
+
         const alat = await model.alat_berat.findAll({
             raw: true,
             nest: true
         });
         let kode = await axios
-            .get('https://alat-berat-service.herokuapp.com/type')
+            .get('http://localhost:3000/type')
             .then(res => {
                 let kode = res.data.data
                 return kode;
             })
-
-        // const coba = `coba${alat}`;
-        // console.log(coba)
 
         alat.forEach(e => {
             kode.forEach(i => {
@@ -31,9 +31,10 @@ const getAllAlat = async (req, res) => {
                     return;
                 }
             })
-            let gambar = e.gambar.replaceAll(" ", "%20");
-            const url = req.protocol + "://" + req.get('host') + "/images/" + gambar;
-            e.gambar = url;
+            if(e.gambar){
+            gambar = e.gambar.replaceAll(" ", "%20");
+            url = server+ "/alat-berat/img/" + gambar;
+            e.gambar = url;}
         });
 
         if (alat.length !== 0) {
@@ -56,10 +57,13 @@ const getAllAlat = async (req, res) => {
             error: err,
         });
     }
+
 };
 
 const postAlat = async (req, res) => {
     try {
+
+        // console.log(req.body)
         const {
             kode_type,
             merk,
@@ -68,9 +72,10 @@ const postAlat = async (req, res) => {
             denda,
             operator,
             bbm,
-            ket
-        } = await req.body;
-        const foto_alat = await req.file;
+            gambar,
+            ket,
+            url_gambar
+        } = req.body;
 
         const alat = await model.alat_berat.create({
             kode_type: kode_type,
@@ -80,26 +85,30 @@ const postAlat = async (req, res) => {
             denda: denda,
             operator: operator,
             bbm: bbm,
-            gambar: foto_alat.filename,
+            gambar: gambar,
             ket: ket
         });
-        filenameUrl = foto_alat.filename.replaceAll(" ", "%20")
-        const url = await req.protocol + "://" + req.get('host') + "/images/" + filenameUrl;
-        const url_json = await {
-            url: url
-        }
 
-        
-        let kode = await show_type(alat.kode_type);
-        // console.log(kode)
-        alat.kode_type=kode;
-        const output = await jm(alat, url_json);
-        // console.log(output)
+        // alat.kode_type=kode;
+        // // console.log(output)
         if (alat) {
             res.status(201).json({
                 'status': 'OK',
                 'messages': 'ALat Berat berhasil ditambah',
-                'data': output
+                'data': {
+                    id: alat.id,
+                    kode_type: alat.kode_type,
+                    merk: alat.merk,
+                    status: alat.status,
+                    harga: alat.harga,
+                    denda: alat.denda,
+                    operator: alat.operator,
+                    bbm: alat.bbm,
+                    gambar: alat.gambar,
+                    ket: alat.ket,
+                    url_gambar: req.body.url_gambar
+
+                }
             })
         }
     } catch (err) {
@@ -114,10 +123,8 @@ const postAlat = async (req, res) => {
 const editAlat = async (req, res) => {
     try {
         const id = req.params.id;
-        let foto_alat, alat;
-        if (req.file) {
-            foto_alat = await req.file;
-        }
+        console.log(req.body)
+
         const {
             kode_type,
             merk,
@@ -126,67 +133,53 @@ const editAlat = async (req, res) => {
             denda,
             operator,
             bbm,
-            ket
+            gambar,
+            ket,
+            url_gambar
         } = req.body;
-        if (foto_alat) {
-            alat = await model.alat_berat.update({
-                kode_type: kode_type,
-                merk: merk,
-                status: status,
-                harga: harga,
-                denda: denda,
-                operator: operator,
-                bbm: bbm,
-                gambar: foto_alat.filename,
-                ket: ket
-            }, {
-                where: {
-                    id: id
-                }
-            });
-        } else {
-            alat = await model.alat_berat.update({
-                kode_type: kode_type,
-                merk: merk,
-                status: status,
-                harga: harga,
-                denda: denda,
-                operator: operator,
-                bbm: bbm,
-                ket: ket
-            }, {
-                where: {
-                    id: id
-                }
-            });
-        }
 
-
-        let kode = await show_type(req.body.kode_type);
-        req.body.kode_type = kode;
-
-        const url = await req.protocol + "//" + req.get('host') + "/images" + foto_alat.filename;
-        const id_json = {
-            id: id
-        }
-        const url_json = await {
-            url: url
-        }
-        const output = await jm(id_json, req.body, url_json);
-
-        if (alat) {
-            res.status(201).json({
-                'status': 'OK',
-                'messages': 'Alat Berat Behasil di update',
-                'data': output
-            })
-        }
-    } catch (err) {
-        res.status(500).json({
-            message: "Ada kesalahan",
-            error: err,
+        const alat = await model.alat_berat.update({
+            kode_type: kode_type,
+            merk: merk,
+            status: status,
+            harga: harga,
+            denda: denda,
+            operator: operator,
+            bbm: bbm,
+            gambar: gambar,
+            ket: ket
+        }, {
+            where: {
+                id: id
+            }
         });
+    if (alat) {
+        res.status(201).json({
+            'status': 'OK',
+            'messages': 'ALat Berat berhasil diedit',
+            'data': {
+                id: req.params.id,
+                kode_type: req.body.kode_type,
+                merk: req.body.merk,
+                status: req.body.status,
+                harga: req.body.harga,
+                denda: req.body.denda,
+                operator: req.body.operator,
+                bbm: req.body.bbm,
+                gambar: req.body.gambar,
+                ket: req.body.ket,
+                url_gambar: req.body.url_gambar
+
+            }
+        })
     }
+} catch (err) {
+    res.status(500).json({
+        message: "Ada kesalahan",
+        error: err,
+    });
+}
+
 };
 
 const deleteAlat = async (req, res) => {
@@ -242,7 +235,7 @@ const getAlatById = async (req, res) => {
         let kode = await show_type(idkode);
         alat.kode_type = kode;
         let gambar = alat.gambar.replaceAll(" ", "%20");
-        const url = req.protocol + "://" + req.get('host') + "/images/" + gambar;
+        url = server+ "/alat-berat/img/" + gambar;
         alat.gambar = url;
         if (alat) {
             res.status(200).json({
@@ -268,7 +261,7 @@ const getAlatById = async (req, res) => {
 
 const show_type = async (idkode) => {
     let kode = await axios
-        .get('https://alat-berat-service.herokuapp.com/type/id/' + idkode)
+        .get('localhost:3000/type/' + idkode)
         .then(res => {
             let kode = res.data.data
             let kode_json = {
